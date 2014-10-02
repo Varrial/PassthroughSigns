@@ -1,0 +1,13 @@
+[
+{
+  "modid": "PassthroughSigns",
+  "name": "Passthrough Signs",
+  "description": "PassthroughSigns",
+  "version": "${mod_version}",
+  "mcversion": "${minecraft_version}",
+  "authors": [ "dmillerw" ],
+  "dependencies": [
+     "mod_MinecraftForge"
+  ]
+}
+]
