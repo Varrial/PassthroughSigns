@@ -1,0 +1,22 @@
+[
+{
+  "modid": "PassthroughSigns",
+  "name": "Passthrough Signs",
+  "description": "",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "http://minecraft.curseforge.com/projects/passthrough-signs",
+  "updateUrl": "",
+  "authorList": [
+    "dmillerw"
+  ],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [
+  ],
+  "parent":"",
+  "dependencies": [
+    "mod_MinecraftForge"
+  ]
+}
+]

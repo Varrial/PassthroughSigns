@@ -1,20 +1,44 @@
 buildscript {
     repositories {
-        mavenCentral()
+        jcenter()
         maven {
             name = "forge"
             url = "http://files.minecraftforge.net/maven"
         }
-        maven {
-            name = "sonatype"
-            url = "https://oss.sonatype.org/content/repositories/snapshots/"
-        }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.1-SNAPSHOT'
     }
 }
+apply plugin: 'net.minecraftforge.gradle.forge'
 
-apply plugin: 'forge'
+version = mod_version
+group = mod_group
+archivesBaseName = mod_archive_name
 
-apply from: "https://raw.githubusercontent.com/dmillerw/MainGradle/master/main.gradle"
+minecraft {
+    runDir = "run"
+    mappings = "snapshot_20151122"
+    version = minecraft_version + "-" + forge_version
+    replaceIn mod_info_path
+    replace "%MOD_VERSION%", mod_version
+    replace "%FORGE_VERSION%", forge_version
+}
+
+display_version = display_version ?: minecraft_version
+version = "${display_version}-${mod_version}.B${System.getenv("BUILD_NUMBER") ?: 0}"
+
+processResources{
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
+
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+                
+        expand 'version':project.version, 'mcversion':project.minecraft.version
+    }
+        
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+    }
+}
