@@ -17,7 +17,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 /**
  * @author dmillerw
  */
-@Mod(modid = "passthroughsigns", name = "PassthroughSigns", version = "%MOD_VERSION%", acceptedMinecraftVersions = "[1.9,1.9.4)", dependencies = "required-after:Forge@[12.16.1.1887,)")
+@Mod(modid = "passthroughsigns", name = "PassthroughSigns", version = "%MOD_VERSION%", acceptedMinecraftVersions = "[1.9,1.9.4]", dependencies = "required-after:Forge@[12.16.1.1887,)")
 public class PassthroughSigns {
 
     @Mod.EventHandler
