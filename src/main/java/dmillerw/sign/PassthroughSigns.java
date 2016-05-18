@@ -17,7 +17,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 /**
  * @author dmillerw
  */
-@Mod(modid = "PassthroughSigns", name = "PassthroughSigns", version = "%MOD_VERSION%", dependencies = "required-after:Forge@[11.14.4,)")
+@Mod(modid = "passthroughsigns", name = "PassthroughSigns", version = "%MOD_VERSION%", acceptedMinecraftVersions = "[1.9,1.9.4)", dependencies = "required-after:Forge@[12.16.1.1887,)")
 public class PassthroughSigns {
 
     @Mod.EventHandler
@@ -30,7 +30,7 @@ public class PassthroughSigns {
         IBlockState state = event.getWorld().getBlockState(event.getPos());
         Block block = state.getBlock();
         EnumFacing facing = EnumFacing.getFront(state.getBlock().getMetaFromState(state)).getOpposite();
-        if (block == Blocks.wall_sign) {
+        if (block == Blocks.WALL_SIGN) {
             ItemStack held = event.getEntityPlayer().getHeldItem(event.getHand());
             if (held != null && held.getItem() instanceof ItemBlock) {
                 event.setUseItem(Event.Result.DENY);
@@ -38,7 +38,7 @@ public class PassthroughSigns {
             if (!event.getEntityPlayer().isSneaking()) {
                 BlockPos posOffset = new BlockPos(event.getPos().getX() + facing.getFrontOffsetX(), event.getPos().getY() + facing.getFrontOffsetY(), event.getPos().getZ() + facing.getFrontOffsetZ());
                 Block attached = event.getWorld().getBlockState(posOffset).getBlock();
-                if (attached != null && !attached.isAir(state, event.getWorld(), posOffset)) {
+                if (!attached.isAir(state, event.getWorld(), posOffset)) {
                     attached.onBlockActivated(event.getWorld(), posOffset, event.getWorld().getBlockState(posOffset), event.getEntityPlayer(), event.getHand(), held, event.getFace(), 0, 0, 0);
                 }
             }
