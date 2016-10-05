@@ -5,11 +5,26 @@ import net.minecraft.world.World;
 
 public interface IPassable {
 
-    public boolean canBePassed(World world, BlockPos pos, EnumPassableType type);
+    /**
+     * Returns true if this block/entity should be passable.
+     *
+     * @param world the world
+     * @param pos   the position of the block/entity
+     * @param type  the EnumPassableType for the block/entity
+     * @return whether the block/entity can be passed or not
+     */
+    boolean canBePassed(World world, BlockPos pos, EnumPassableType type);
 
-    public static enum EnumPassableType {
-        WALL_SIGN, //TODO Rename to HANGING
-        /*Item frames, banners etc. */
-        HANGING_ENTITY;
+    enum EnumPassableType {
+
+        /**
+         * For blocks similiar to wall signs & banners.
+         */
+        WALL_BLOCK,
+
+        /**
+         * For entities similar to item frames, paintings etc.
+         */
+        HANGING_ENTITY
     }
 }

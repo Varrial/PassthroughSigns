@@ -34,7 +34,7 @@ minecraft {
 }
 
 display_version = "${display_version}" ?: "${minecraft_version}"
-version = "${display_version}-${mod_version}"
+version = "${display_version}-${mod_version}${buildnumber}"
 
 processResources {
     inputs.property "version", project.version
