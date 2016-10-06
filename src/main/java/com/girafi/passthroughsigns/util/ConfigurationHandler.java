@@ -14,6 +14,7 @@ public class ConfigurationHandler {
     static boolean shouldBannerBePassable;
     static boolean shouldItemFrameBePassable;
     static boolean shouldPaintingsBePassable;
+    static boolean turnOffItemRotation;
 
 
     public static void init(File configFile) {
@@ -24,10 +25,11 @@ public class ConfigurationHandler {
     }
 
     private static void loadConfiguration() {
-        shouldWallSignBePassable = config.getBoolean("Should wall signs be passable", CATEGORY_GENERAL, true, "Whether wall signs should be passable or not.");
-        shouldBannerBePassable = config.getBoolean("Should banners be passable", CATEGORY_GENERAL, false, "Whether banners should be passable or not.");
-        shouldItemFrameBePassable = config.getBoolean("Should items frames be passable", CATEGORY_GENERAL, false, "Whether item frames should be passable or not.");
-        shouldPaintingsBePassable = config.getBoolean("Should paintings be passable", CATEGORY_GENERAL, false, "Whether paintings should be passable or not.");
+        shouldWallSignBePassable = config.getBoolean("Ignore wall signs", CATEGORY_GENERAL, true, "Whether to ignore wall signs when attached to an interactable block or not.");
+        shouldBannerBePassable = config.getBoolean("Ignore banners", CATEGORY_GENERAL, false, "Whether to ignore banners when attached to an interactable block or not. ");
+        shouldItemFrameBePassable = config.getBoolean("Ignore item frames", CATEGORY_GENERAL, false, "Whether to ignore item frames when attached to an interactable block or not");
+        turnOffItemRotation = config.getBoolean("Turn off item rotation", CATEGORY_GENERAL, false, "Disable default behaviour of item frames rotation display, when not sneaking (Recommended when ignoring item frames is enabled)");
+        shouldPaintingsBePassable = config.getBoolean("Ignore paintings", CATEGORY_GENERAL, false, "Whether to ignore paintings when attached to an interactable block or not.");
 
         if (config.hasChanged()) {
             config.save();

@@ -34,7 +34,7 @@ public class PassableHandler {
                 block instanceof IPassable && ((IPassable) block).canBePassed(world, pos, IPassable.EnumPassableType.WALL_BLOCK)) {
             EnumFacing facingOpposite = EnumFacing.getFront(block.getMetaFromState(state)).getOpposite();
 
-            ItemStack heldStack = player.getHeldItem(event.getHand());
+            ItemStack heldStack = player.getHeldItemMainhand();
             if (heldStack != null && heldStack.getItem() instanceof ItemBlock) {
                 event.setUseItem(Event.Result.DENY);
             }
@@ -54,7 +54,10 @@ public class PassableHandler {
                 entity instanceof IPassable && ((IPassable) entity).canBePassed(world, pos, IPassable.EnumPassableType.HANGING_ENTITY)) {
             EnumFacing facingOpposite = entity.getHorizontalFacing().getOpposite();
 
-            this.rightClick(world, pos, player, event.getHand(), player.getHeldItem(event.getHand()), event.getFace(), facingOpposite);
+            if (!player.isSneaking() && entity instanceof EntityItemFrame && turnOffItemRotation) {
+                event.setCanceled(true);
+            }
+            this.rightClick(world, pos, player, event.getHand(), player.getHeldItemMainhand(), event.getFace(), facingOpposite);
         }
     }
 
