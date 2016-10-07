@@ -58,6 +58,7 @@ publishing {
         mavenJava(MavenPublication) {
             artifactId 'passthroughsigns_1.10.2'
             artifact jar
+			artifact artifacts
         }
     }
     repositories {
