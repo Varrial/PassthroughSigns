@@ -56,7 +56,7 @@ publishing {
     tasks.publish.dependsOn 'build'
     publications {
         mavenJava(MavenPublication) {
-            artifactId 'passthroughsigns'
+            artifactId 'passthroughsigns_1.10.2'
             artifact jar
         }
     }
