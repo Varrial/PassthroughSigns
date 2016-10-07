@@ -18,7 +18,7 @@ if (System.getenv().BUILD_NUMBER) {
     ext.buildnumber = ".B" + System.getenv().BUILD_NUMBER
 }
 
-version = "${mod_version}"
+version = "${minecraft_version}-${mod_version}${buildnumber}"
 group = "com.girafi.passthroughsigns"
 archivesBaseName = "PassthroughSigns"
 
@@ -33,9 +33,6 @@ minecraft {
     replace "%API_VERSION%", "${api_version}"
     replaceIn "package-info.java"
 }
-
-display_version = "${display_version}" ?: "${minecraft_version}"
-version = "${display_version}-${mod_version}${buildnumber}"
 
 processResources {
     inputs.property "version", project.version
