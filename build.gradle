@@ -76,7 +76,3 @@ task apiJar(type: Jar) {
 artifacts {
     archives apiJar
 }
-
-jar {
-    classifier = 'universal'
-}
