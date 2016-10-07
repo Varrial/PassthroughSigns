@@ -6,7 +6,7 @@ import net.minecraft.world.World;
 public interface IPassable {
 
     /**
-     * Returns true if this block/entity should be passable.
+     * Return true if this block/entity should be passable.
      *
      * @param world the world
      * @param pos   the position of the block/entity

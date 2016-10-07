@@ -1,6 +1,7 @@
 package com.girafi.passthroughsigns.util;
 
 import com.girafi.passthroughsigns.api.IPassable;
+import com.girafi.passthroughsigns.api.PassthroughSignsAPI;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -31,14 +32,14 @@ public class PassableHandler {
         Block block = world.getBlockState(pos).getBlock();
 
         if (block == Blocks.WALL_SIGN && shouldWallSignBePassable || block == Blocks.WALL_BANNER && shouldBannerBePassable ||
-                block instanceof IPassable && ((IPassable) block).canBePassed(world, pos, IPassable.EnumPassableType.WALL_BLOCK)) {
+                block instanceof IPassable && PassthroughSignsAPI.passable.canBePassed(world, pos, IPassable.EnumPassableType.WALL_BLOCK) ||
+                PassthroughSignsAPI.BLOCK_PASSABLES.contains(block)) {
             EnumFacing facingOpposite = EnumFacing.getFront(block.getMetaFromState(state)).getOpposite();
 
             ItemStack heldStack = player.getHeldItemMainhand();
             if (heldStack != null && heldStack.getItem() instanceof ItemBlock) {
                 event.setUseItem(Event.Result.DENY);
             }
-
             this.rightClick(world, pos, player, event.getHand(), heldStack, event.getFace(), facingOpposite);
         }
     }
@@ -51,7 +52,8 @@ public class PassableHandler {
         Entity entity = event.getTarget();
 
         if (entity instanceof EntityItemFrame && shouldItemFrameBePassable || entity instanceof EntityPainting && shouldPaintingsBePassable ||
-                entity instanceof IPassable && ((IPassable) entity).canBePassed(world, pos, IPassable.EnumPassableType.HANGING_ENTITY)) {
+                entity instanceof IPassable && PassthroughSignsAPI.passable.canBePassed(world, pos, IPassable.EnumPassableType.HANGING_ENTITY) ||
+                PassthroughSignsAPI.ENTITY_PASSABLES.contains(entity.getClass())) {
             EnumFacing facingOpposite = entity.getHorizontalFacing().getOpposite();
 
             if (!player.isSneaking() && entity instanceof EntityItemFrame && turnOffItemRotation) {
