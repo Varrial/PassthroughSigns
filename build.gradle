@@ -67,6 +67,11 @@ publishing {
     }
 }
 
+task javadocJar(type: Jar, dependsOn: javadoc) {
+	from javadoc.destinationDir
+	classifier = 'javadoc'
+}
+
 task apiJar(type: Jar) {
     from sourceSets.main.allSource
     include 'com/girafi/passthroughsigns/api/**/*'
@@ -74,5 +79,6 @@ task apiJar(type: Jar) {
 }
 
 artifacts {
+    archives javadocJar
     archives apiJar
 }
