@@ -67,6 +67,12 @@ publishing {
     }
 }
 
+allprojects {
+	tasks.withType(Javadoc) {
+		options.addStringOption('Xdoclint:none', '-quiet')
+	}
+}
+
 task javadocJar(type: Jar, dependsOn: javadoc) {
 	from javadoc.destinationDir
 	classifier = 'javadoc'
