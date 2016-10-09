@@ -55,6 +55,7 @@ publishing {
         mavenJava(MavenPublication) {
             artifactId 'passthroughsigns'
             artifact jar
+			artifact sourcesJar
 			artifact apiJar
         }
     }
@@ -67,24 +68,19 @@ publishing {
     }
 }
 
-allprojects {
-	tasks.withType(Javadoc) {
-		options.addStringOption('Xdoclint:none', '-quiet')
-	}
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-	from javadoc.destinationDir
-	classifier = 'javadoc'
+task sourcesJar(type: Jar) {
+	from sourceSets.main.allJava
+	classifier = 'sources'
 }
 
 task apiJar(type: Jar) {
-    from sourceSets.main.allSource
+	from sourceSets.main.allSource
+	from sourceSets.main.output
     include 'com/girafi/passthroughsigns/api/**/*'
     classifier = 'api'
 }
 
 artifacts {
-    archives javadocJar
+    archives sourcesJar
     archives apiJar
 }

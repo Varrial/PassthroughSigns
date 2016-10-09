@@ -40,7 +40,16 @@ public class PassableHandler {
             if (heldStack != null && heldStack.getItem() instanceof ItemBlock) {
                 event.setUseItem(Event.Result.DENY);
             }
-            this.rightClick(world, pos, player, event.getHand(), heldStack, event.getFace(), facingOpposite);
+
+            if (block == Blocks.WALL_SIGN) {
+                if (Reference.IS_QUARK_LOADED == player.isSneaking()) {
+                    this.rightClick(world, pos, player, event.getHand(), heldStack, event.getFace(), facingOpposite);
+                } else if (!Reference.IS_QUARK_LOADED == !player.isSneaking()) {
+                    this.rightClick(world, pos, player, event.getHand(), heldStack, event.getFace(), facingOpposite);
+                }
+            } else if (!player.isSneaking()) {
+                this.rightClick(world, pos, player, event.getHand(), heldStack, event.getFace(), facingOpposite);
+            }
         }
     }
 
@@ -56,15 +65,17 @@ public class PassableHandler {
                 PassthroughSignsAPI.ENTITY_PASSABLES.contains(entity.getClass())) {
             EnumFacing facingOpposite = entity.getHorizontalFacing().getOpposite();
 
-            if (!player.isSneaking() && entity instanceof EntityItemFrame && turnOffItemRotation) {
-                event.setCanceled(true);
+            if (!player.isSneaking()) {
+                if (entity instanceof EntityItemFrame && turnOffItemRotation) {
+                    event.setCanceled(true);
+                }
+                this.rightClick(world, pos, player, event.getHand(), player.getHeldItemMainhand(), event.getFace(), facingOpposite);
             }
-            this.rightClick(world, pos, player, event.getHand(), player.getHeldItemMainhand(), event.getFace(), facingOpposite);
         }
     }
 
     private void rightClick(World world, BlockPos pos, EntityPlayer player, EnumHand hand, ItemStack heldStack, EnumFacing facing, EnumFacing facingOpposite) {
-        if (!player.isSneaking() && hand == EnumHand.MAIN_HAND) {
+        if (hand == EnumHand.MAIN_HAND) {
             BlockPos posOffset = pos.add(facingOpposite.getFrontOffsetX(), facingOpposite.getFrontOffsetY(), facingOpposite.getFrontOffsetZ());
             IBlockState attachedState = world.getBlockState(posOffset);
             if (!attachedState.getBlock().isAir(attachedState, world, pos)) {
