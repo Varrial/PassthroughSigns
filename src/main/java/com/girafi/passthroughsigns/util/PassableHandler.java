@@ -32,7 +32,7 @@ public class PassableHandler {
         Block block = world.getBlockState(pos).getBlock();
 
         if (block == Blocks.WALL_SIGN && shouldWallSignBePassable || block == Blocks.WALL_BANNER && shouldBannerBePassable ||
-                block instanceof IPassable && PassthroughSignsAPI.passable.canBePassed(world, pos, IPassable.EnumPassableType.WALL_BLOCK) ||
+                block instanceof IPassable && ((IPassable)block).canBePassed(world, pos, IPassable.EnumPassableType.WALL_BLOCK) ||
                 PassthroughSignsAPI.BLOCK_PASSABLES.contains(block)) {
             EnumFacing facingOpposite = EnumFacing.getFront(block.getMetaFromState(state)).getOpposite();
 
@@ -61,7 +61,7 @@ public class PassableHandler {
         Entity entity = event.getTarget();
 
         if (entity instanceof EntityItemFrame && shouldItemFrameBePassable || entity instanceof EntityPainting && shouldPaintingsBePassable ||
-                entity instanceof IPassable && PassthroughSignsAPI.passable.canBePassed(world, pos, IPassable.EnumPassableType.HANGING_ENTITY) ||
+                entity instanceof IPassable && ((IPassable)entity).canBePassed(world, pos, IPassable.EnumPassableType.HANGING_ENTITY) ||
                 PassthroughSignsAPI.ENTITY_PASSABLES.contains(entity.getClass())) {
             EnumFacing facingOpposite = entity.getHorizontalFacing().getOpposite();
 
