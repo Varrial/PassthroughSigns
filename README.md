@@ -26,4 +26,4 @@ dependencies {
 `${mc_version}` & `${passthroughsigns_version}` can be found [here](http://girafi.dk/maven/com/girafi/passthroughsigns/passthroughsigns/), check the file name of the version you want.
 
 Passthrough Signs also have intermod communicaiton, example of how to use it: 
-`FMLInterModComms.sendMessage("passthroughsigns", "registerPassable", "block registry name or entity class from string");`
+`FMLInterModComms.sendMessage("passthroughsigns", "registerPassable", "block/entity registry name");`

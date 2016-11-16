@@ -14,16 +14,17 @@ public class PassthroughSignsAPI {
     public static final Set<Class<? extends Entity>> ENTITY_PASSABLES = new HashSet<Class<? extends Entity>>();
 
     /**
-     * Can be used to make a block/entity based on its registry name/class from string passable
-     * Example of use of intermod communication : FMLInterModComms.sendMessage("passthroughsigns", "registerPassable", "block registry name or entity class from string");
+     * Can be used to make a block/entity based on its registry name from string passable
+     * Example of use of intermod communication : FMLInterModComms.sendMessage("passthroughsigns", "registerPassable", "block/entity registry name");
      *
      * @param string the string of a blocks registry name or a entities class string
      */
     public static void setCanBePassed(String string) {
-        if (EntityList.isStringValidEntityName(string)) {
-            ENTITY_PASSABLES.add(EntityList.getClassFromID(EntityList.getIDFromString(string)));
-        } else if (Block.REGISTRY.containsKey(new ResourceLocation(string))) {
-            BLOCK_PASSABLES.add(Block.REGISTRY.getObject(new ResourceLocation(string)));
+        ResourceLocation resourceLocation = new ResourceLocation(string);
+        if (EntityList.isStringValidEntityName(resourceLocation)) {
+            ENTITY_PASSABLES.add(EntityList.field_191308_b.getObject(resourceLocation));
+        } else if (Block.REGISTRY.containsKey(resourceLocation)) {
+            BLOCK_PASSABLES.add(Block.REGISTRY.getObject(resourceLocation));
         }
     }
 

@@ -32,23 +32,23 @@ public class PassableHandler {
         Block block = world.getBlockState(pos).getBlock();
 
         if (block == Blocks.WALL_SIGN && shouldWallSignBePassable || block == Blocks.WALL_BANNER && shouldBannerBePassable ||
-                block instanceof IPassable && ((IPassable)block).canBePassed(world, pos, IPassable.EnumPassableType.WALL_BLOCK) ||
+                block instanceof IPassable && ((IPassable) block).canBePassed(world, pos, IPassable.EnumPassableType.WALL_BLOCK) ||
                 PassthroughSignsAPI.BLOCK_PASSABLES.contains(block)) {
             EnumFacing facingOpposite = EnumFacing.getFront(block.getMetaFromState(state)).getOpposite();
 
             ItemStack heldStack = player.getHeldItemMainhand();
-            if (heldStack != null && heldStack.getItem() instanceof ItemBlock) {
+            if (heldStack.getItem() instanceof ItemBlock) {
                 event.setUseItem(Event.Result.DENY);
             }
 
             if (block == Blocks.WALL_SIGN) {
                 if (Reference.IS_QUARK_LOADED == player.isSneaking()) {
-                    this.rightClick(world, pos, player, event.getHand(), heldStack, event.getFace(), facingOpposite);
+                    this.rightClick(world, pos, player, event.getHand(), event.getFace(), facingOpposite);
                 } else if (!Reference.IS_QUARK_LOADED == !player.isSneaking()) {
-                    this.rightClick(world, pos, player, event.getHand(), heldStack, event.getFace(), facingOpposite);
+                    this.rightClick(world, pos, player, event.getHand(), event.getFace(), facingOpposite);
                 }
             } else if (!player.isSneaking()) {
-                this.rightClick(world, pos, player, event.getHand(), heldStack, event.getFace(), facingOpposite);
+                this.rightClick(world, pos, player, event.getHand(), event.getFace(), facingOpposite);
             }
         }
     }
@@ -61,7 +61,7 @@ public class PassableHandler {
         Entity entity = event.getTarget();
 
         if (entity instanceof EntityItemFrame && shouldItemFrameBePassable || entity instanceof EntityPainting && shouldPaintingsBePassable ||
-                entity instanceof IPassable && ((IPassable)entity).canBePassed(world, pos, IPassable.EnumPassableType.HANGING_ENTITY) ||
+                entity instanceof IPassable && ((IPassable) entity).canBePassed(world, pos, IPassable.EnumPassableType.HANGING_ENTITY) ||
                 PassthroughSignsAPI.ENTITY_PASSABLES.contains(entity.getClass())) {
             EnumFacing facingOpposite = entity.getHorizontalFacing().getOpposite();
 
@@ -69,17 +69,17 @@ public class PassableHandler {
                 if (entity instanceof EntityItemFrame && turnOffItemRotation) {
                     event.setCanceled(true);
                 }
-                this.rightClick(world, pos, player, event.getHand(), player.getHeldItemMainhand(), event.getFace(), facingOpposite);
+                this.rightClick(world, pos, player, event.getHand(), event.getFace(), facingOpposite);
             }
         }
     }
 
-    private void rightClick(World world, BlockPos pos, EntityPlayer player, EnumHand hand, ItemStack heldStack, EnumFacing facing, EnumFacing facingOpposite) {
+    private void rightClick(World world, BlockPos pos, EntityPlayer player, EnumHand hand, EnumFacing facing, EnumFacing facingOpposite) {
         if (hand == EnumHand.MAIN_HAND) {
             BlockPos posOffset = pos.add(facingOpposite.getFrontOffsetX(), facingOpposite.getFrontOffsetY(), facingOpposite.getFrontOffsetZ());
             IBlockState attachedState = world.getBlockState(posOffset);
             if (!attachedState.getBlock().isAir(attachedState, world, pos)) {
-                attachedState.getBlock().onBlockActivated(world, posOffset, attachedState, player, hand, heldStack, facing, 0, 0, 0);
+                attachedState.getBlock().onBlockActivated(world, posOffset, attachedState, player, hand, facing, 0, 0, 0);
             }
         }
     }
