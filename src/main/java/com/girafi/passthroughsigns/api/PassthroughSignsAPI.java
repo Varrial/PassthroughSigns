@@ -21,8 +21,8 @@ public class PassthroughSignsAPI {
      */
     public static void setCanBePassed(String string) {
         ResourceLocation resourceLocation = new ResourceLocation(string);
-        if (EntityList.isStringValidEntityName(resourceLocation)) {
-            ENTITY_PASSABLES.add(EntityList.field_191308_b.getObject(resourceLocation));
+        if (EntityList.isRegistered(resourceLocation)) {
+            ENTITY_PASSABLES.add(EntityList.getClass(resourceLocation));
         } else if (Block.REGISTRY.containsKey(resourceLocation)) {
             BLOCK_PASSABLES.add(Block.REGISTRY.getObject(resourceLocation));
         }
