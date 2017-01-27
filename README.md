@@ -19,7 +19,7 @@ repositories {
 
 dependencies {
   // compile against Passthrough Signs
-  deobfCompile "com.girafi.passthroughsigns:passthroughsigns:${mc_version}-${passthroughsigns_version}"
+  deobfCompile "com.girafi.passthroughsigns:passthroughsigns_${mc_version}:${mc_version}-${passthroughsigns_version}"
 }
 ```
 
