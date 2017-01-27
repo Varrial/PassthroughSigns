@@ -53,7 +53,7 @@ publishing {
     tasks.publish.dependsOn 'build'
     publications {
         mavenJava(MavenPublication) {
-            artifactId 'passthroughsigns_${minecraft_version}'
+            artifactId "passthroughsigns_${minecraft_version}"
             artifact jar
 			artifact sourcesJar
 			artifact apiJar
