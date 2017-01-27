@@ -19,11 +19,11 @@ repositories {
 
 dependencies {
   // compile against Passthrough Signs
-  deobfCompile "com.girafi.passthroughsigns:passthroughsigns:${mc_version}-${passthroughsigns_version}"
+  deobfCompile "com.girafi.passthroughsigns:passthroughsigns_${mc_version}:${mc_version}-${passthroughsigns_version}"
 }
 ```
 
-`${mc_version}` & `${passthroughsigns_version}` can be found [here](http://girafi.dk/maven/com/girafi/passthroughsigns/passthroughsigns/), check the file name of the version you want.
+`${mc_version}` & `${passthroughsigns_version}` can be found [here](http://girafi.dk/maven/com/girafi/passthroughsigns/), check the file name of the version you want.
 
 Passthrough Signs also have intermod communicaiton, example of how to use it: 
 `FMLInterModComms.sendMessage("passthroughsigns", "registerPassable", "block/entity registry name");`
