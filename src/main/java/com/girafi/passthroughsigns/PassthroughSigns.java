@@ -12,7 +12,7 @@ import java.io.File;
 
 import static com.girafi.passthroughsigns.util.Reference.*;
 
-@Mod(modid = MOD_ID, name = MOD_NAME, version = MOD_VERSION, acceptedMinecraftVersions = "[1.11,1.12)", dependencies = DEPENDENCIES, guiFactory = GUI_FACTORY_CLASS)
+@Mod(modid = MOD_ID, name = MOD_NAME, version = MOD_VERSION, dependencies = DEPENDENCIES, guiFactory = GUI_FACTORY_CLASS)
 public class PassthroughSigns {
 
     @Mod.EventHandler
