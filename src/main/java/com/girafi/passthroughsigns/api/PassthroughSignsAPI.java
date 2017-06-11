@@ -10,8 +10,8 @@ import java.util.Set;
 
 public class PassthroughSignsAPI {
     public static IPassable passable;
-    public static final Set<Block> BLOCK_PASSABLES = new HashSet<Block>();
-    public static final Set<Class<? extends Entity>> ENTITY_PASSABLES = new HashSet<Class<? extends Entity>>();
+    public static final Set<Block> BLOCK_PASSABLES = new HashSet<>();
+    public static final Set<Class<? extends Entity>> ENTITY_PASSABLES = new HashSet<>();
 
     /**
      * Can be used to make a block/entity based on its registry name from string passable

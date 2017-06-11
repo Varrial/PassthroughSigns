@@ -18,7 +18,7 @@ public interface IPassable {
     enum EnumPassableType {
 
         /**
-         * For blocks similiar to wall signs & banners.
+         * For blocks similar to wall signs & banners.
          */
         WALL_BLOCK,
 
