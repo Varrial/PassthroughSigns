@@ -16,15 +16,17 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import static com.girafi.passthroughsigns.util.ConfigurationHandler.*;
 
+@EventBusSubscriber
 public class PassableHandler {
 
     @SubscribeEvent
-    public void onPlayerInteract(PlayerInteractEvent.RightClickBlock event) {
+    public static void onPlayerInteract(PlayerInteractEvent.RightClickBlock event) {
         World world = event.getWorld();
         BlockPos pos = event.getPos();
         IBlockState state = world.getBlockState(pos);
@@ -43,18 +45,18 @@ public class PassableHandler {
 
             if (block == Blocks.WALL_SIGN) {
                 if (Reference.IS_QUARK_LOADED == player.isSneaking()) {
-                    this.rightClick(world, pos, player, event.getHand(), event.getFace(), facingOpposite);
+                    rightClick(world, pos, player, event.getHand(), event.getFace(), facingOpposite);
                 } else if (!Reference.IS_QUARK_LOADED == !player.isSneaking()) {
-                    this.rightClick(world, pos, player, event.getHand(), event.getFace(), facingOpposite);
+                    rightClick(world, pos, player, event.getHand(), event.getFace(), facingOpposite);
                 }
             } else if (!player.isSneaking()) {
-                this.rightClick(world, pos, player, event.getHand(), event.getFace(), facingOpposite);
+                rightClick(world, pos, player, event.getHand(), event.getFace(), facingOpposite);
             }
         }
     }
 
     @SubscribeEvent
-    public void onEntityInteract(PlayerInteractEvent.EntityInteract event) {
+    public static void onEntityInteract(PlayerInteractEvent.EntityInteract event) {
         World world = event.getWorld();
         BlockPos pos = event.getPos();
         EntityPlayer player = event.getEntityPlayer();
@@ -69,12 +71,12 @@ public class PassableHandler {
                 if (entity instanceof EntityItemFrame && turnOffItemRotation) {
                     event.setCanceled(true);
                 }
-                this.rightClick(world, pos, player, event.getHand(), event.getFace(), facingOpposite);
+                rightClick(world, pos, player, event.getHand(), event.getFace(), facingOpposite);
             }
         }
     }
 
-    private void rightClick(World world, BlockPos pos, EntityPlayer player, EnumHand hand, EnumFacing facing, EnumFacing facingOpposite) {
+    private static void rightClick(World world, BlockPos pos, EntityPlayer player, EnumHand hand, EnumFacing facing, EnumFacing facingOpposite) {
         if (hand == EnumHand.MAIN_HAND) {
             BlockPos posOffset = pos.add(facingOpposite.getFrontOffsetX(), facingOpposite.getFrontOffsetY(), facingOpposite.getFrontOffsetZ());
             IBlockState attachedState = world.getBlockState(posOffset);

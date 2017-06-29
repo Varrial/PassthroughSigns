@@ -2,8 +2,6 @@ package com.girafi.passthroughsigns;
 
 import com.girafi.passthroughsigns.api.PassthroughSignsAPI;
 import com.girafi.passthroughsigns.util.ConfigurationHandler;
-import com.girafi.passthroughsigns.util.PassableHandler;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInterModComms;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -18,8 +16,6 @@ public class PassthroughSigns {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         ConfigurationHandler.init(new File(event.getModConfigurationDirectory(), "PassthroughSigns.cfg"));
-        MinecraftForge.EVENT_BUS.register(new ConfigurationHandler());
-        MinecraftForge.EVENT_BUS.register(new PassableHandler());
     }
 
     @Mod.EventHandler

@@ -2,12 +2,14 @@ package com.girafi.passthroughsigns.util;
 
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.io.File;
 
 import static net.minecraftforge.common.config.Configuration.CATEGORY_GENERAL;
 
+@EventBusSubscriber
 public class ConfigurationHandler {
     static Configuration config;
     static boolean shouldWallSignBePassable;
@@ -37,7 +39,7 @@ public class ConfigurationHandler {
     }
 
     @SubscribeEvent
-    public void onConfigurationChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event) {
+    public static void onConfigurationChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event) {
         if (event.getModID().equalsIgnoreCase(Reference.MOD_ID)) {
             loadConfiguration();
         }
