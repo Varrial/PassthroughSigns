@@ -17,6 +17,7 @@ public class ConfigurationHandler {
     static boolean shouldItemFrameBePassable;
     static boolean shouldPaintingsBePassable;
     static boolean turnOffItemRotation;
+    static boolean shiftClickQuark;
 
 
     public static void init(File configFile) {
@@ -32,6 +33,7 @@ public class ConfigurationHandler {
         shouldItemFrameBePassable = config.getBoolean("Ignore item frames", CATEGORY_GENERAL, false, "Whether to ignore item frames when attached to an interactable block or not");
         turnOffItemRotation = config.getBoolean("Turn off item rotation", CATEGORY_GENERAL, false, "Disable default behaviour of item frames rotation display, when not sneaking (Recommended when ignoring item frames is enabled)");
         shouldPaintingsBePassable = config.getBoolean("Ignore paintings", CATEGORY_GENERAL, false, "Whether to ignore paintings when attached to an interactable block or not.");
+        shiftClickQuark = config.getBoolean("Shift-click to ignore signs (Quark)", CATEGORY_GENERAL, true, "Whether shift-click is required to ignore signs, when Quark is installed.");
 
         if (config.hasChanged()) {
             config.save();

@@ -44,9 +44,9 @@ public class PassableHandler {
             }
 
             if (block == Blocks.WALL_SIGN) {
-                if (Reference.IS_QUARK_LOADED == player.isSneaking()) {
+                if (Reference.IS_QUARK_LOADED == player.isSneaking() && shiftClickQuark) {
                     rightClick(world, pos, player, event.getHand(), event.getFace(), facingOpposite);
-                } else if (!Reference.IS_QUARK_LOADED == !player.isSneaking()) {
+                } else {
                     rightClick(world, pos, player, event.getHand(), event.getFace(), facingOpposite);
                 }
             } else if (!player.isSneaking()) {
