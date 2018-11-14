@@ -33,10 +33,10 @@ public class PassableHandler {
         EntityPlayer player = event.getEntityPlayer();
         Block block = world.getBlockState(pos).getBlock();
 
-        if (block == Blocks.WALL_SIGN && shouldWallSignBePassable || block == Blocks.WALL_BANNER && shouldBannerBePassable ||
+        if (block == Blocks.WALL_SIGN && shouldWallSignBePassable || (block == Blocks.WALL_BANNER || block == Blocks.STANDING_BANNER) && shouldBannerBePassable ||
                 block instanceof IPassable && ((IPassable) block).canBePassed(world, pos, IPassable.EnumPassableType.WALL_BLOCK) ||
                 PassthroughSignsAPI.BLOCK_PASSABLES.contains(block)) {
-            EnumFacing facingOpposite = EnumFacing.getFront(block.getMetaFromState(state)).getOpposite();
+            EnumFacing facingOpposite = EnumFacing.byIndex(block.getMetaFromState(state)).getOpposite();
 
             ItemStack heldStack = player.getHeldItemMainhand();
             if (heldStack.getItem() instanceof ItemBlock) {
@@ -78,9 +78,13 @@ public class PassableHandler {
 
     private static void rightClick(World world, BlockPos pos, EntityPlayer player, EnumHand hand, EnumFacing facing, EnumFacing facingOpposite) {
         if (hand == EnumHand.MAIN_HAND) {
-            BlockPos posOffset = pos.add(facingOpposite.getFrontOffsetX(), facingOpposite.getFrontOffsetY(), facingOpposite.getFrontOffsetZ());
+            BlockPos posOffset = pos.add(facingOpposite.getXOffset(), facingOpposite.getYOffset(), facingOpposite.getZOffset());
             IBlockState attachedState = world.getBlockState(posOffset);
-            if (!attachedState.getBlock().isAir(attachedState, world, pos)) {
+
+            IBlockState stateDown = world.getBlockState(pos.down());
+            if (!world.isAirBlock(pos.down()) && attachedState.getBlock().isAir(attachedState, world, pos)) {
+                stateDown.getBlock().onBlockActivated(world, pos.down(), stateDown, player, hand, null, 0, 0, 0);
+            } else if (!attachedState.getBlock().isAir(attachedState, world, pos)) {
                 attachedState.getBlock().onBlockActivated(world, posOffset, attachedState, player, hand, facing, 0, 0, 0);
             }
         }

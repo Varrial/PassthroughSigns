@@ -10,6 +10,12 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'maven-publish'
 
+repositories {
+  maven {
+    url "https://maven.blamejared.com"
+  }
+}
+
 ext.buildnumber=""
 if (System.getenv().BUILD_NUMBER) {
     ext.buildnumber = ".B" + System.getenv().BUILD_NUMBER
@@ -29,6 +35,10 @@ minecraft {
 
     replace "%API_VERSION%", "${api_version}"
     replaceIn "package-info.java"
+}
+
+dependencies {
+    deobfCompile "vazkii.autoreglib:AutoRegLib:${auto_reg_lib_version}"
 }
 
 processResources {
