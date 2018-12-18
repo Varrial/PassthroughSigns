@@ -37,10 +37,6 @@ minecraft {
     replaceIn "package-info.java"
 }
 
-dependencies {
-    deobfCompile "vazkii.autoreglib:AutoRegLib:${auto_reg_lib_version}"
-}
-
 processResources {
     inputs.property "version", project.version
     inputs.property "mcversion", project.minecraft.version
