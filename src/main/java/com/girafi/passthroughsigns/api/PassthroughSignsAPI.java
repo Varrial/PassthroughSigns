@@ -2,10 +2,11 @@ package com.girafi.passthroughsigns.api;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityList;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 public class PassthroughSignsAPI {
@@ -15,16 +16,16 @@ public class PassthroughSignsAPI {
 
     /**
      * Can be used to make a block/entity based on its registry name from string passable
-     * Example of use of intermod communication : FMLInterModComms.sendMessage("passthroughsigns", "registerPassable", "block/entity registry name");
+     * Example of use of intermod communication : InterModComms.sendTo("passthroughsigns", "registerPassable", "block/entity registry name");
      *
      * @param string the string of a blocks registry name or a entities class string
      */
     public static void setCanBePassed(String string) {
         ResourceLocation resourceLocation = new ResourceLocation(string);
-        if (EntityList.isRegistered(resourceLocation)) {
-            ENTITY_PASSABLES.add(EntityList.getClass(resourceLocation));
-        } else if (Block.REGISTRY.containsKey(resourceLocation)) {
-            BLOCK_PASSABLES.add(Block.REGISTRY.getObject(resourceLocation));
+        if (ForgeRegistries.ENTITIES.containsKey(resourceLocation)) {
+            ENTITY_PASSABLES.add(Objects.requireNonNull(ForgeRegistries.ENTITIES.getValue(resourceLocation)).getEntityClass());
+        } else if (ForgeRegistries.BLOCKS.containsKey(resourceLocation)) {
+            BLOCK_PASSABLES.add(ForgeRegistries.BLOCKS.getValue(resourceLocation));
         }
     }
 

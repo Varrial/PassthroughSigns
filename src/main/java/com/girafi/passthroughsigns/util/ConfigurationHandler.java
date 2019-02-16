@@ -1,49 +1,48 @@
 package com.girafi.passthroughsigns.util;
 
-import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.fml.client.event.ConfigChangedEvent;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.common.ForgeConfigSpec;
 
-import java.io.File;
-
-import static net.minecraftforge.common.config.Configuration.CATEGORY_GENERAL;
-
-@EventBusSubscriber
 public class ConfigurationHandler {
-    static Configuration config;
-    static boolean shouldWallSignBePassable;
-    static boolean shouldBannerBePassable;
-    static boolean shouldItemFrameBePassable;
-    static boolean shouldPaintingsBePassable;
-    static boolean turnOffItemRotation;
-    static boolean shiftClickQuark;
+    private static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
+    public static final General GENERAL = new General(BUILDER);
 
+    public static class General {
+        public ForgeConfigSpec.BooleanValue shouldWallSignBePassable;
+        public ForgeConfigSpec.BooleanValue shouldBannerBePassable;
+        public ForgeConfigSpec.BooleanValue shouldItemFrameBePassable;
+        public ForgeConfigSpec.BooleanValue shouldPaintingsBePassable;
+        public ForgeConfigSpec.BooleanValue turnOffItemRotation;
+        public ForgeConfigSpec.BooleanValue shiftClickQuark;
 
-    public static void init(File configFile) {
-        if (config == null) {
-            config = new Configuration(configFile);
-            loadConfiguration();
+        General(ForgeConfigSpec.Builder builder) {
+            builder.push("general");
+            shouldWallSignBePassable = builder
+                    .comment("Whether to ignore wall signs when attached to an interactable block or not.")
+                    .translation("passthroughsigns.configgui.shouldWallSignBePassable")
+                    .define("Ignore wall signs", true);
+            shouldBannerBePassable = builder
+                    .comment("Whether to ignore banners when attached to an interactable block or not.")
+                    .translation("passthroughsigns.configgui.shouldBannerBePassable")
+                    .define("Ignore banners", false);
+            shouldItemFrameBePassable = builder
+                    .comment("Whether to ignore item frames when attached to an interactable block or not.")
+                    .translation("passthroughsigns.configgui.shouldItemFrameBePassable")
+                    .define("Ignore item frames", false);
+            shouldPaintingsBePassable = builder
+                    .comment("Whether to ignore paintings when attached to an interactable block or not.")
+                    .translation("passthroughsigns.configgui.shouldPaintingsBePassable")
+                    .define("Ignore paintings", false);
+            turnOffItemRotation = builder
+                    .comment("Disable default behaviour of item frames rotation display, when not sneaking (Recommended when ignoring item frames is enabled)")
+                    .translation("passthroughsigns.configgui.turnOffItemRotation")
+                    .define("Turn off item rotation", false);
+            shiftClickQuark = builder
+                    .comment("Whether shift-click is required to ignore signs, when Quark is installed.")
+                    .translation("passthroughsigns.configgui.shiftClickQuark")
+                    .define("Shift-click to ignore signs (Quark)", false);
+            builder.pop();
         }
     }
 
-    private static void loadConfiguration() {
-        shouldWallSignBePassable = config.getBoolean("Ignore wall signs", CATEGORY_GENERAL, true, "Whether to ignore wall signs when attached to an interactable block or not.");
-        shouldBannerBePassable = config.getBoolean("Ignore banners", CATEGORY_GENERAL, false, "Whether to ignore banners when attached to an interactable block or not. ");
-        shouldItemFrameBePassable = config.getBoolean("Ignore item frames", CATEGORY_GENERAL, false, "Whether to ignore item frames when attached to an interactable block or not");
-        turnOffItemRotation = config.getBoolean("Turn off item rotation", CATEGORY_GENERAL, false, "Disable default behaviour of item frames rotation display, when not sneaking (Recommended when ignoring item frames is enabled)");
-        shouldPaintingsBePassable = config.getBoolean("Ignore paintings", CATEGORY_GENERAL, false, "Whether to ignore paintings when attached to an interactable block or not.");
-        shiftClickQuark = config.getBoolean("Shift-click to ignore signs (Quark)", CATEGORY_GENERAL, true, "Whether shift-click is required to ignore signs, when Quark is installed.");
-
-        if (config.hasChanged()) {
-            config.save();
-        }
-    }
-
-    @SubscribeEvent
-    public static void onConfigurationChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event) {
-        if (event.getModID().equalsIgnoreCase(Reference.MOD_ID)) {
-            loadConfiguration();
-        }
-    }
+    public static final ForgeConfigSpec spec = BUILDER.build();
 }

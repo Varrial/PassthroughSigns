@@ -1,0 +1,12 @@
+modLoader="javafml"
+loaderVersion="[25,)"
+issueTrackerURL="https://github.com/dmillerw/PassthroughSigns/issues"
+
+[[mods]]
+    modId="passthroughsigns"
+    version="${version}"
+    displayName="Passthrough Signs"
+    displayURL="http://minecraft.curseforge.com/projects/passthrough-signs"
+    authors="Girafi, dmillerw"
+    description='''
+    '''

@@ -1,4 +1,4 @@
-package com.girafi.passthroughsigns.util;
+/*package com.girafi.passthroughsigns.util;
 
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.common.config.ConfigElement;
@@ -16,4 +16,4 @@ public class GuiFactory extends DefaultGuiFactory {
     public GuiScreen createConfigGui(GuiScreen parentScreen) {
         return new GuiConfig(parentScreen, new ConfigElement(ConfigurationHandler.config.getCategory(Configuration.CATEGORY_GENERAL)).getChildElements(), Reference.MOD_ID, false, false, title);
     }
-}
+}*/
