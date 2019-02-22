@@ -4,7 +4,7 @@ issueTrackerURL="https://github.com/dmillerw/PassthroughSigns/issues"
 
 [[mods]]
     modId="passthroughsigns"
-    version="${version}"
+    version="${file.jarVersion}"
     displayName="Passthrough Signs"
     displayURL="http://minecraft.curseforge.com/projects/passthrough-signs"
     authors="Girafi, dmillerw"
