@@ -13,7 +13,7 @@ Add to your build.gradle:
 repositories {
   maven {
     // url of the maven that hosts Passthrough Signs files
-    url "http://girafi.dk/maven/"
+    url "https://girafi.dk/maven/"
   }
 }
 
@@ -23,7 +23,7 @@ dependencies {
 }
 ```
 
-`${mc_version}` & `${passthroughsigns_version}` can be found [here](http://girafi.dk/maven/com/girafi/passthroughsigns/), check the file name of the version you want.
+`${mc_version}` & `${passthroughsigns_version}` can be found [here](https://girafi.dk/maven/com/girafi/passthroughsigns/), check the file name of the version you want.
 
 Passthrough Signs also have intermod communicaiton, example of how to use it: 
 `FMLInterModComms.sendMessage("passthroughsigns", "registerPassable", "block/entity registry name");`
