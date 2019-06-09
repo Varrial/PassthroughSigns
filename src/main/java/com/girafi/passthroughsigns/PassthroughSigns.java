@@ -8,10 +8,9 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
-import static com.girafi.passthroughsigns.util.Reference.MOD_ID;
-
-@Mod(value = MOD_ID)
+@Mod(value = PassthroughSigns.MOD_ID)
 public class PassthroughSigns {
+    public static final String MOD_ID = "passthroughsigns";
 
     public PassthroughSigns() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::handleIMCMessages);

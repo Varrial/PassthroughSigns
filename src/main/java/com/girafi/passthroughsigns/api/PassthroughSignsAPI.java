@@ -1,18 +1,17 @@
 package com.girafi.passthroughsigns.api;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 public class PassthroughSignsAPI {
     public static IPassable passable;
     public static final Set<Block> BLOCK_PASSABLES = new HashSet<>();
-    public static final Set<Class<? extends Entity>> ENTITY_PASSABLES = new HashSet<>();
+    public static final Set<EntityType<?>> ENTITY_PASSABLES = new HashSet<>();
 
     /**
      * Can be used to make a block/entity based on its registry name from string passable
@@ -23,7 +22,7 @@ public class PassthroughSignsAPI {
     public static void setCanBePassed(String string) {
         ResourceLocation resourceLocation = new ResourceLocation(string);
         if (ForgeRegistries.ENTITIES.containsKey(resourceLocation)) {
-            ENTITY_PASSABLES.add(Objects.requireNonNull(ForgeRegistries.ENTITIES.getValue(resourceLocation)).getEntityClass());
+            ENTITY_PASSABLES.add(ForgeRegistries.ENTITIES.getValue(resourceLocation));
         } else if (ForgeRegistries.BLOCKS.containsKey(resourceLocation)) {
             BLOCK_PASSABLES.add(ForgeRegistries.BLOCKS.getValue(resourceLocation));
         }
@@ -41,9 +40,9 @@ public class PassthroughSignsAPI {
     /**
      * Convenience method for making a entity passable
      *
-     * @param entityClass the class containing the entity
+     * @param entityType the entity type
      **/
-    public static void setCanBePassed(Class<? extends Entity> entityClass) {
-        ENTITY_PASSABLES.add(entityClass);
+    public static void setCanBePassed(EntityType entityType) {
+        ENTITY_PASSABLES.add(entityType);
     }
 }
