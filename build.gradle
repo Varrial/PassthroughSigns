@@ -21,7 +21,7 @@ group = "com.girafi.passthroughsigns"
 archivesBaseName = "PassthroughSigns"
 
 minecraft {
-    mappings channel: 'snapshot', version: '20190608-1.14.2'
+    mappings channel: 'snapshot', version: project.mappings + "-" + project.minecraft_version
 
     runs {
         client = {
