@@ -31,9 +31,9 @@ public class PassableHandler {
         World world = event.getWorld();
         BlockPos pos = event.getPos();
         BlockState state = world.getBlockState(pos);
-        PlayerEntity player = event.getEntityPlayer();
+        PlayerEntity player = event.getPlayer();
         Block block = state.getBlock();
-
+        
         if (block instanceof WallSignBlock && GENERAL.shouldWallSignBePassable.get() || block instanceof WallBannerBlock && GENERAL.shouldBannerBePassable.get() ||
                 block instanceof IPassable && ((IPassable) block).canBePassed(world, pos, IPassable.EnumPassableType.WALL_BLOCK) ||
                 PassthroughSignsAPI.BLOCK_PASSABLES.contains(block)) {
@@ -65,7 +65,7 @@ public class PassableHandler {
     public static void onEntityInteract(PlayerInteractEvent.EntityInteract event) {
         World world = event.getWorld();
         BlockPos pos = event.getPos();
-        PlayerEntity player = event.getEntityPlayer();
+        PlayerEntity player = event.getPlayer();
         Entity entity = event.getTarget();
 
         if (entity instanceof ItemFrameEntity && GENERAL.shouldItemFrameBePassable.get() || entity instanceof PaintingEntity && GENERAL.shouldPaintingsBePassable.get() ||
