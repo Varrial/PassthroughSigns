@@ -10,3 +10,10 @@ issueTrackerURL="https://github.com/dmillerw/PassthroughSigns/issues"
     authors="Girafi, dmillerw"
     description='''
     '''
+
+[[dependencies.passthroughsigns]]
+    modId="forge"
+    mandatory=true
+    versionRange="[28.0.87,)"
+    ordering="AFTER"
+    side="BOTH"

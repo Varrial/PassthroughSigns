@@ -33,7 +33,7 @@ public class PassableHandler {
         BlockState state = world.getBlockState(pos);
         PlayerEntity player = event.getPlayer();
         Block block = state.getBlock();
-        
+
         if (block instanceof WallSignBlock && GENERAL.shouldWallSignBePassable.get() || block instanceof WallBannerBlock && GENERAL.shouldBannerBePassable.get() ||
                 block instanceof IPassable && ((IPassable) block).canBePassed(world, pos, IPassable.EnumPassableType.WALL_BLOCK) ||
                 PassthroughSignsAPI.BLOCK_PASSABLES.contains(block)) {
