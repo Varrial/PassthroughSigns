@@ -50,12 +50,12 @@ public class PassableHandler {
             }
 
             if (block instanceof WallSignBlock) {
-                if (IS_QUARK_LOADED && player.isSneaking() && GENERAL.shiftClickQuark.get()) {
+                if (IS_QUARK_LOADED && player.isCrouching() && GENERAL.shiftClickQuark.get()) {
                     rightClick(world, pos, player, event.getHand(), facingOpposite);
                 } else if (!IS_QUARK_LOADED) {
                     rightClick(world, pos, player, event.getHand(), facingOpposite);
                 }
-            } else if (!player.isSneaking()) {
+            } else if (!player.isCrouching()) {
                 rightClick(world, pos, player, event.getHand(), facingOpposite);
             }
         }
@@ -73,7 +73,7 @@ public class PassableHandler {
                 PassthroughSignsAPI.ENTITY_PASSABLES.contains(entity.getType())) {
             Direction facingOpposite = entity.getHorizontalFacing().getOpposite();
 
-            if (!player.isSneaking()) {
+            if (!player.isCrouching()) {
                 if (entity instanceof ItemFrameEntity && GENERAL.turnOffItemRotation.get()) {
                     event.setCanceled(true);
                 }
@@ -89,9 +89,9 @@ public class PassableHandler {
 
             BlockState stateDown = world.getBlockState(pos.down());
             if (!world.isAirBlock(pos.down()) && attachedState.getBlock().isAir(attachedState, world, pos)) {
-                stateDown.getBlock().onBlockActivated(attachedState, world, pos.down(), player, hand, null);
+                stateDown.getBlock().func_225533_a_(attachedState, world, pos.down(), player, hand, null);
             } else if (!attachedState.getBlock().isAir(attachedState, world, pos)) {
-                attachedState.getBlock().onBlockActivated(attachedState, world, posOffset, player, hand, null);
+                attachedState.getBlock().func_225533_a_(attachedState, world, posOffset, player, hand, null);
             }
         }
     }
