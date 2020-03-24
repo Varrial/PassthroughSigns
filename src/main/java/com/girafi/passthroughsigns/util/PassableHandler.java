@@ -13,6 +13,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.Event;
@@ -88,10 +90,11 @@ public class PassableHandler {
             BlockState attachedState = world.getBlockState(posOffset);
 
             BlockState stateDown = world.getBlockState(pos.down());
+            BlockRayTraceResult rayTrace = new BlockRayTraceResult(new Vec3d(posOffset.getX(), posOffset.getY(), posOffset.getZ()), facingOpposite, pos, false);
             if (!world.isAirBlock(pos.down()) && attachedState.getBlock().isAir(attachedState, world, pos)) {
-                stateDown.getBlock().func_225533_a_(attachedState, world, pos.down(), player, hand, null);
+                stateDown.getBlock().onBlockActivated(attachedState, world, pos.down(), player, hand, rayTrace);
             } else if (!attachedState.getBlock().isAir(attachedState, world, pos)) {
-                attachedState.getBlock().func_225533_a_(attachedState, world, posOffset, player, hand, null);
+                attachedState.getBlock().onBlockActivated(attachedState, world, posOffset, player, hand, rayTrace);
             }
         }
     }
