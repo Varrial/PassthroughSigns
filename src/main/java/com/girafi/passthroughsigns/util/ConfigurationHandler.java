@@ -39,7 +39,7 @@ public class ConfigurationHandler {
             shiftClickQuark = builder
                     .comment("Whether shift-click is required to ignore signs, when Quark is installed.")
                     .translation("passthroughsigns.configgui.shiftClickQuark")
-                    .define("Shift-click to ignore signs (Quark)", false);
+                    .define("Shift-click to ignore signs (Quark)", true);
             builder.pop();
         }
     }
