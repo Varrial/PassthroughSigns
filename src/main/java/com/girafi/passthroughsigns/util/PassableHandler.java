@@ -45,12 +45,7 @@ public class PassableHandler {
             } else if (state.has(HorizontalBlock.HORIZONTAL_FACING)) {
                 facingOpposite = state.get(HorizontalBlock.HORIZONTAL_FACING).getOpposite();
             }
-
-            ItemStack heldStack = player.getHeldItemMainhand();
-            if (heldStack.getItem() instanceof BlockItem) {
-                event.setUseItem(Event.Result.DENY);
-            }
-
+            
             if (block instanceof WallSignBlock) {
                 if (IS_QUARK_LOADED && player.isCrouching() && GENERAL.shiftClickQuark.get()) {
                     rightClick(world, pos, player, event.getHand(), facingOpposite);
