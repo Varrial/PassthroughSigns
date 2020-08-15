@@ -8,9 +8,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.ItemFrameEntity;
 import net.minecraft.entity.item.PaintingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.state.StateHolder;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
@@ -18,7 +15,6 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -40,12 +36,12 @@ public class PassableHandler {
                 block instanceof IPassable && ((IPassable) block).canBePassed(world, pos, IPassable.EnumPassableType.WALL_BLOCK) ||
                 PassthroughSignsAPI.BLOCK_PASSABLES.contains(block)) {
             Direction facingOpposite = Direction.NORTH.getOpposite();
-            if (state.func_235901_b_(DirectionalBlock.FACING)) {
+            if (state.hasProperty(DirectionalBlock.FACING)) {
                 facingOpposite = state.get(DirectionalBlock.FACING).getOpposite();
-            } else if (state.func_235901_b_(HorizontalBlock.HORIZONTAL_FACING)) {
+            } else if (state.hasProperty(HorizontalBlock.HORIZONTAL_FACING)) {
                 facingOpposite = state.get(HorizontalBlock.HORIZONTAL_FACING).getOpposite();
             }
-            
+
             if (block instanceof WallSignBlock) {
                 if (IS_QUARK_LOADED && player.isCrouching() && GENERAL.shiftClickQuark.get()) {
                     rightClick(world, pos, player, event.getHand(), facingOpposite);

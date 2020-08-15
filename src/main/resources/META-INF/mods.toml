@@ -1,6 +1,7 @@
 modLoader="javafml"
-loaderVersion="[30,)"
+loaderVersion="[32,)"
 issueTrackerURL="https://github.com/dmillerw/PassthroughSigns/issues"
+license="All rights reserved"
 
 [[mods]]
     modId="passthroughsigns"
@@ -14,6 +15,6 @@ issueTrackerURL="https://github.com/dmillerw/PassthroughSigns/issues"
 [[dependencies.passthroughsigns]]
     modId="forge"
     mandatory=true
-    versionRange="[30,)"
+    versionRange="[32,)"
     ordering="AFTER"
     side="BOTH"
